@@ -9,16 +9,16 @@ import static org.junit.Assert.*;
 public class GeradorDeNotaFiscalTests {
 
 	private static final double PRECISAO = 0.00001;
-	private EnviadorDeEmail email;
+	private AcaoAposGeracaoDaNota email;
 	private NotaFiscalDao dao;
 	private GeradorDeNotaFiscal gerador;
 
 	@Before
 	public void setUp() {
-		email = mock(EnviadorDeEmail.class);
+		email = mock(AcaoAposGeracaoDaNota.class);
 		dao = mock(NotaFiscalDao.class);
 
-		gerador = new GeradorDeNotaFiscal(email, dao);
+		gerador = new GeradorDeNotaFiscal(email);
 	}
 	
 	@Test
@@ -36,7 +36,7 @@ public class GeradorDeNotaFiscalTests {
 		Fatura fatura = new Fatura(1000, "cliente 1");
 		NotaFiscal nf = gerador.gera(fatura);
 		
-		verify(email).enviaEmail(nf);
+		verify(email).executa(nf);
 	}
 	
 	@Test
