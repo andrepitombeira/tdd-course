@@ -11,8 +11,10 @@ public class QuebraCabecaNumerico {
 	private int saida;
 	private List<Numero> fila;
 	private Set<Integer> visitados;
+	private final Formatador formatador;
 	
-	public QuebraCabecaNumerico() {
+	public QuebraCabecaNumerico(Formatador formatador) {
+		this.formatador = formatador;
 		this.fila = new ArrayList<Numero>();
 		this.visitados = new HashSet<Integer>();
 	}
@@ -21,7 +23,7 @@ public class QuebraCabecaNumerico {
 		this.entrada = entrada;
 		this.saida = saida;
 		
-		return formataSaida(buscaSolucao());
+		return formatador.formata(buscaSolucao());
 	}
 	
 	private Numero buscaSolucao() {
@@ -72,7 +74,7 @@ public class QuebraCabecaNumerico {
 	private String formataSaida(Numero solucao) {
 		String resposta = "";
 			while(solucao!=null) {
-				resposta = solucao.getValor() + " " + resposta;
+				resposta = solucao.getValor() + " -> " + resposta;
 				solucao = solucao.getPai();
 			}
 		return resposta;
@@ -95,6 +97,5 @@ public class QuebraCabecaNumerico {
 		fila.remove(0);
 		return topoDaFila;
 	}
-	
 
 }
